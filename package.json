@@ -1,5 +1,24 @@
 {
+  "name": "my-blog-project",
+  "version": "1.0.0",
+  "description": "API REST de Blog con Authors, Posts y Comments",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
+  },
+  "keywords": ["nodejs", "express", "postgresql", "api", "blog"],
+  "author": "Facundo Rozalez",
+  "license": "MIT",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2",
+    "vitest": "^4.1.0"
   }
 }
