@@ -1,0 +1,289 @@
+openapi: 3.0.0
+info:
+  title: Blog API - Proyecto M2
+  description: API para la gestión de autores, publicaciones y comentarios.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+    description: Servidor de desarrollo
+
+tags:
+  - name: Authors
+    description: Operaciones sobre autores
+  - name: Posts
+    description: Operaciones sobre publicaciones
+  - name: Comments
+    description: Operaciones sobre comentarios
+
+paths:
+
+  /authors:
+    get:
+      tags: [Authors]
+      summary: Obtener todos los autores
+      responses:
+        200:
+          description: Lista de autores devuelta con éxito
+    post:
+      tags: [Authors]
+      summary: Crear un nuevo autor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        201:
+          description: Autor creado
+        400:
+          description: Error de validación (ej. falta email)
+
+  /authors/{id}:
+    get:
+      tags: [Authors]
+      summary: Obtener autor por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Datos del autor
+        404:
+          description: Autor no encontrado
+    put:
+      tags: [Authors]
+      summary: Actualizar un autor completo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: Autor actualizado
+        404:
+          description: Autor no encontrado
+    delete:
+      tags: [Authors]
+      summary: Eliminar un autor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Autor eliminado con éxito (No Content)
+        404:
+          description: Autor no encontrado
+
+
+  /posts:
+    get:
+      tags: [Posts]
+      summary: Obtener todos los posts (con nombre de autor)
+      responses:
+        200:
+          description: Lista de posts
+    post:
+      tags: [Posts]
+      summary: Crear una nueva publicación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        201:
+          description: Post creado
+        400:
+          description: Faltan campos obligatorios
+        404:
+          description: Autor no encontrado
+
+  /posts/{id}:
+    get:
+      tags: [Posts]
+      summary: Obtener detalle de un post por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Datos del post
+        404:
+          description: Post no encontrado
+    put:
+      tags: [Posts]
+      summary: Actualizar una publicación
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        200:
+          description: Post actualizado
+        404:
+          description: Post o Autor no encontrado
+    delete:
+      tags: [Posts]
+      summary: Eliminar una publicación
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Post eliminado
+        404:
+          description: Post no encontrado
+
+  /posts/author/{authorId}:
+    get:
+      tags: [Posts]
+      summary: Obtener posts filtrados por autor
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Lista de posts del autor
+
+
+  /comments:
+    get:
+      tags: [Comments]
+      summary: Listar todos los comentarios
+      responses:
+        200:
+          description: Lista de comentarios
+    post:
+      tags: [Comments]
+      summary: Crear un comentario en un post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        201:
+          description: Comentario creado
+        400:
+          description: Faltan IDs o contenido
+
+  /comments/post/{postId}:
+    get:
+      tags: [Comments]
+      summary: Obtener comentarios de una publicación específica
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Comentarios del post solicitado
+
+  /comments/{id}:
+    delete:
+      tags: [Comments]
+      summary: Eliminar un comentario por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Comentario borrado
+        404:
+          description: Comentario no encontrado
+
+components:
+  schemas:
+    Author:
+      type: object
+      required: [name, email]
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          example: "Juan Perez"
+        email:
+          type: string
+          example: "juan@example.com"
+        bio:
+          type: string
+          example: "Escritor apasionado"
+
+    Post:
+      type: object
+      required: [title, content, author_id]
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          example: "Mi primer post"
+        content:
+          type: string
+          example: "Contenido extenso de la publicación"
+        author_id:
+          type: integer
+          example: 1
+        published:
+          type: boolean
+          default: true
+
+    Comment:
+      type: object
+      required: [content, post_id, author_id]
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        content:
+          type: string
+          example: "Muy interesante este post!"
+        post_id:
+          type: integer
+          example: 1
+        author_id:
+          type: integer
+          example: 1

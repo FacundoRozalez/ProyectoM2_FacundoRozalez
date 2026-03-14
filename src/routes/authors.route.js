@@ -1,6 +1,12 @@
-import { Router } from 'express';
+import express from "express";
+import * as authorsController from "../controllers/authors.controller.js";
 
-const router = Router();
+const router = express.Router();
 
-// Exportamos el router por defecto
+router.get("/", authorsController.getAuthors);
+router.get("/:id", authorsController.getAuthorById);
+router.post("/", authorsController.createAuthor);
+router.put("/:id", authorsController.updateAuthor);
+router.delete("/:id", authorsController.deleteAuthor);
+
 export default router;

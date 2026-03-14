@@ -1,6 +1,15 @@
-import { Router } from 'express';
+import express from "express";
+import * as postsController from "../controllers/posts.controller.js";
 
-const router = Router();
+const router = express.Router();
 
-// Exportamos el router por defecto
+router.get("/", postsController.getPosts);
+router.get("/:id", postsController.getPostById);
+router.get("/author/:authorId", postsController.getPostsByAuthor);
+router.post("/", postsController.createPost);
+router.put("/:id", postsController.updatePost);
+router.delete("/:id", postsController.deletePost);
+
 export default router;
+
+
