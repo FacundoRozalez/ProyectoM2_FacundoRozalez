@@ -1,12 +1,18 @@
-import express from "express";
-import * as authorsController from "../controllers/authors.controller.js";
+import { Router } from "express";
+import { 
+  getAuthors, 
+  getAuthorById, 
+  createAuthor, 
+  updateAuthor, 
+  deleteAuthor 
+} from "../controllers/authors.controller.js";
+import { validateAuthor } from "../middlewares/authors.middleware.js";
 
-const router = express.Router();
-
-router.get("/", authorsController.getAuthors);
-router.get("/:id", authorsController.getAuthorById);
-router.post("/", authorsController.createAuthor);
-router.put("/:id", authorsController.updateAuthor);
-router.delete("/:id", authorsController.deleteAuthor);
+const router = Router();
+router.get("/", getAuthors);
+router.get("/:id", getAuthorById);
+router.post("/", validateAuthor, createAuthor);
+router.put("/:id", validateAuthor, updateAuthor);
+router.delete("/:id", deleteAuthor);
 
 export default router;

@@ -1,15 +1,21 @@
-import express from "express";
-import * as postsController from "../controllers/posts.controller.js";
+import { Router } from "express";
+import { 
+  getPosts, 
+  getPostById, 
+  getPostsByAuthor, 
+  createPost, 
+  updatePost, 
+  deletePost 
+} from "../controllers/posts.controller.js";
 
-const router = express.Router();
+import { validatePost } from "../middlewares/posts.middleware.js";
 
-router.get("/", postsController.getPosts);
-router.get("/:id", postsController.getPostById);
-router.get("/author/:authorId", postsController.getPostsByAuthor);
-router.post("/", postsController.createPost);
-router.put("/:id", postsController.updatePost);
-router.delete("/:id", postsController.deletePost);
+const router = Router();
+router.get("/", getPosts);
+router.get("/:id", getPostById);
+router.get("/author/:authorId", getPostsByAuthor);
+router.post("/", validatePost, createPost);
+router.put("/:id", validatePost, updatePost);
+router.delete("/:id", deletePost);
 
 export default router;
-
-
