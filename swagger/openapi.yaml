@@ -5,6 +5,8 @@ info:
   version: 1.0.0
 
 servers:
+  - url: https://proyectom2facundorozalez-production.up.railway.app
+    description: Servidor de Producción (Railway)
   - url: http://localhost:3000/api
     description: Servidor de desarrollo
 

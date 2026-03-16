@@ -1,4 +1,4 @@
-# My Blog Project
+# MiniBlog - DevSpark (Proyecto Integrador | Módulo 2)
 
 ## Descripción del Proyecto
 
@@ -24,7 +24,7 @@ API REST para un blog que permite gestionar autores, publicaciones (posts) y com
 
 1. **Clona el repositorio**:
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/FacundoRozalez/ProyectoM2_FacundoRozalez
    cd ProyectoM2_FacundoRozalez
    ```
 
@@ -69,22 +69,26 @@ Los tests incluyen cobertura, generada en `coverage/`.
 
 ## Cómo Ejecutar la Documentación OpenAPI
 
-La documentación de la API está disponible via Swagger UI en `http://localhost:3000/api-docs` cuando el servidor está corriendo.
+La documentación de la API está disponible via Swagger UI en `http://localhost:3000/openapi` cuando el servidor local está corriendo.
 
 El archivo OpenAPI se encuentra en `swagger/openapi.yaml`.
 
 ## Breve Guía de Deployment en Railway
+
 
 1. **Crea una cuenta en Railway** y conecta tu repositorio de GitHub.
 
 2. **Agrega un servicio PostgreSQL**:
    - En el dashboard de Railway, agrega un plugin de PostgreSQL.
    - Copia las credenciales proporcionadas (internal URL, etc.).
+    
+    **Nota:** Una vez creado el servicio de PostgreSQL en Railway, recuerda ejecutar los scripts de `sql/setup.sql` y `sql/seed.sql` utilizando la **URL de conexión pública** o el editor de datos de Railway para poblar la base de datos.
 
 3. **Configura variables de entorno**:
    - En la configuración del servicio, agrega las variables de `.env.example`:
      - DBUSER, DBHOST, DBDATABASE, DBPASSWORD, DBPORT (usa la internal URL de PostgreSQL para DBHOST).
      - PORT=3000 (o el asignado por Railway).
+     - Tip: En Railway es mejor usar referencias como ${{Postgres.PGHOST}} para aprovechar la red interna gratuita.
 
 4. **Deploy**:
    - Railway detectará el `package.json` y desplegará automáticamente.
@@ -92,8 +96,8 @@ El archivo OpenAPI se encuentra en `swagger/openapi.yaml`.
    - La **internal URL** es para conexiones internas (como la DB).
 
 5. **Accede**:
-   - API: Public URL (ej. `https://mi-app.railway.app`)
-   - Docs: `https://mi-app.railway.app/api-docs`
+   - API: https://proyectom2facundorozalez-production.up.railway.app
+   - Docs: https://proyectom2facundorozalez-production.up.railway.app/openapi
 
 ## Registro del Uso de AI en el Proyecto
 
@@ -106,6 +110,8 @@ En este proyecto se utilizaron herramientas de IA como soporte complementario pa
 
 **GitHub Copilot (Asistente de Escritura):**
 - **Documentación:** Utilizado exclusivamente como apoyo en la redacción de este README.md y para agilizar la escritura de comentarios JSDoc en el código.
+
+## Tecnologías Utilizadas
 
 - **Node.js** con módulos ES
 - **Express.js** para el servidor web
@@ -157,4 +163,5 @@ my-blog-project/
 
 ## Autor
 
-Facundo Rozalez
+Facundo Rozalez 
+Cohorte: WEB-FT72
