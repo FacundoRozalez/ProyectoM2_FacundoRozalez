@@ -150,11 +150,11 @@ my-blog-project/
 │       ├── posts.service.js
 │       └── comments.service.js
 ├── test/
-│   ├── unit/
+│   ├── unit/                 # Tests unitarios de la capa de Servicios (Lógica de negocio)
 │   │   ├── authors.service.test.js
 │   │   ├── posts.service.test.js
 │   │   └── comments.service.test.js
-│   └── integration/
+│   └── integration/          # Tests de integración de la capa de Rutas (Endpoints API)
 │       ├── authors.route.test.js
 │       ├── posts.route.test.js
 │       └── comments.route.test.js
