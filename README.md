@@ -10,9 +10,9 @@ API REST para un blog que permite gestionar autores, publicaciones (posts) y com
 - **Comments**: id, post_id (FK → posts.id), author_id (FK → authors.id), content, created_at
 
 ### Endpoints REST
-- **Authors**: GET /authors, GET /authors/:id, POST /authors, PUT /authors/:id, DELETE /authors/:id
-- **Posts**: GET /posts, GET /posts/:id, GET /posts/author/:authorId, POST /posts, PUT /posts/:id, DELETE /posts/:id
-- **Comments**: GET /comments, GET /comments/:id, POST /comments, PUT /comments/:id, DELETE /comments/:id
+- **Authors**: GET /api/authors, GET /api/authors/:id, POST /api/authors, PUT /api/authors/:id, DELETE /api/authors/:id
+- **Posts**: GET /api/posts, GET /api/posts/:id, GET /api/posts/author/:authorId, POST /api/posts, PUT /api/posts/:id, DELETE /api/posts/:id
+- **Comments**: GET /api/comments, GET /api/comments/:id, POST /api/comments, PUT /api/comments/:id, DELETE /api/comments/:id
 
 ## Requisitos
 
@@ -96,8 +96,8 @@ El archivo OpenAPI se encuentra en `swagger/openapi.yaml`.
    - La **internal URL** es para conexiones internas (como la DB).
 
 5. **Accede**:
-   - API: https://proyectom2facundorozalez-production.up.railway.app
-   - Docs: https://proyectom2facundorozalez-production.up.railway.app/openapi
+   - API: https://proyectom2facundorozalez-production.up.railway.app/
+   - Docs: https://proyectom2facundorozalez-production.up.railway.app/openapi/api
 
 ## Registro del Uso de AI en el Proyecto
 
@@ -137,9 +137,9 @@ my-blog-project/
 │   ├── server.js            # Arranca el servidor
 │   ├── config.js            # Pool de PostgreSQL usando .env
 │   ├── routes/
-│   │   ├── authors.routes.js
-│   │   ├── posts.routes.js
-│   │   └── comments.routes.js
+│   │   ├── authors.route.js
+│   │   ├── posts.route.js
+│   │   └── comments.route.js
 │   ├── controllers/
 │   │   ├── authors.controller.js
 │   │   ├── posts.controller.js
@@ -154,9 +154,9 @@ my-blog-project/
 │   │   ├── posts.service.test.js
 │   │   └── comments.service.test.js
 │   └── integration/
-│       ├── authors.routes.test.js
-│       ├── posts.routes.test.js
-│       └── comments.routes.test.js
+│       ├── authors.route.test.js
+│       ├── posts.route.test.js
+│       └── comments.route.test.js
 └── swagger/
     └── openapi.yaml         # Documentación de la API
 ```
