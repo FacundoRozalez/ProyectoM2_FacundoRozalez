@@ -27,6 +27,8 @@ paths:
       responses:
         200:
           description: Lista de autores devuelta con éxito
+        500:
+          description: Error interno del servidor
     post:
       tags: [Authors]
       summary: Crear un nuevo autor
@@ -41,6 +43,10 @@ paths:
           description: Autor creado
         400:
           description: Error de validación (ej. falta email)
+        409:
+          description: El email ya existe en la base de datos
+        500:
+          description: Error interno del servidor
 
   /authors/{id}:
     get:
@@ -55,6 +61,8 @@ paths:
       responses:
         200:
           description: Datos del autor
+        400:
+          description: ID inválido
         404:
           description: Autor no encontrado
     put:
@@ -75,6 +83,8 @@ paths:
       responses:
         200:
           description: Autor actualizado
+        400:
+          description: Datos inválidos
         404:
           description: Autor no encontrado
     delete:
@@ -100,6 +110,8 @@ paths:
       responses:
         200:
           description: Lista de posts
+        500:
+          description: Error interno del servidor
     post:
       tags: [Posts]
       summary: Crear una nueva publicación
@@ -113,9 +125,9 @@ paths:
         201:
           description: Post creado
         400:
-          description: Faltan campos obligatorios
-        404:
-          description: Autor no encontrado
+          description: Faltan campos obligatorios o Autor no encontrado
+        500:
+          description: Error interno del servidor
 
   /posts/{id}:
     get:
@@ -132,6 +144,8 @@ paths:
           description: Datos del post
         404:
           description: Post no encontrado
+        500:
+          description: Error interno del servidor
     put:
       tags: [Posts]
       summary: Actualizar una publicación
@@ -150,8 +164,10 @@ paths:
       responses:
         200:
           description: Post actualizado
-        404:
+        400:
           description: Post o Autor no encontrado
+        500:
+          description: Error interno del servidor
     delete:
       tags: [Posts]
       summary: Eliminar una publicación
@@ -166,6 +182,8 @@ paths:
           description: Post eliminado
         404:
           description: Post no encontrado
+        500:
+          description: Error interno del servidor
 
   /posts/author/{authorId}:
     get:
@@ -180,6 +198,10 @@ paths:
       responses:
         200:
           description: Lista de posts del autor
+        500:
+          description: Error interno del servidor
+        404:
+          description: Autor no encontrado
 
 
   /comments:
@@ -189,6 +211,8 @@ paths:
       responses:
         200:
           description: Lista de comentarios
+        500:
+          description: Error interno del servidor
     post:
       tags: [Comments]
       summary: Crear un comentario en un post
@@ -202,7 +226,9 @@ paths:
         201:
           description: Comentario creado
         400:
-          description: Faltan IDs o contenido
+          description: Faltan IDs o contenido, o Post/Autor no encontrado
+        500:
+          description: Error interno del servidor  
 
   /comments/post/{postId}:
     get:
@@ -217,6 +243,10 @@ paths:
       responses:
         200:
           description: Comentarios del post solicitado
+        404:
+          description: Post no encontrado
+        500:
+          description: Error interno del servidor
 
   /comments/{id}:
     delete:
@@ -233,6 +263,8 @@ paths:
           description: Comentario borrado
         404:
           description: Comentario no encontrado
+        500:
+          description: Error interno del servidor
 
 components:
   schemas:

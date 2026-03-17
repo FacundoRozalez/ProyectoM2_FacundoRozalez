@@ -24,11 +24,22 @@ export const createAuthorService = async ({ name, email, bio }) => {
 };
 
 export const updateAuthorService = async (id, { name, email, bio }) => {
-  const { rows } = await pool.query(
-    "UPDATE authors SET name = $1, email = $2, bio = $3 WHERE id = $4 RETURNING *",
-    [name, email, bio, id]
-  );
-  return rows[0] || null;
+  try {
+    if (email) {
+      const { rows } = await pool.query("SELECT id FROM authors WHERE email = $1 AND id != $2", [email, id]);
+      if (rows.length > 0) {
+        throw new Error("EMAIL_EXISTS");
+      }
+    }
+    const { rows } = await pool.query(
+      "UPDATE authors SET name = $1, email = $2, bio = $3 WHERE id = $4 RETURNING *",
+      [name, email, bio, id]
+    );
+    return rows[0] || null;
+  } catch (error) {
+    if (error.code === '23505') throw new Error("EMAIL_EXISTS");
+    throw error;
+  }
 };
 
 export const deleteAuthorService = async (id) => {

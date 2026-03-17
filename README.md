@@ -1,4 +1,5 @@
-# MiniBlog - DevSpark (Proyecto Integrador | Módulo 2)
+# MiniBlog - DevSpark 
+(Proyecto Integrador | Módulo 2)
 
 ## Descripción del Proyecto
 
@@ -109,7 +110,7 @@ En este proyecto se utilizaron herramientas de IA como soporte complementario pa
 - **Soporte en Documentación y Deploy:** Consultas puntuales sobre la sintaxis de OpenAPI (Swagger) y resolución de errores específicos durante la configuración en Railway.
 
 **GitHub Copilot (Asistente de Escritura):**
-- **Documentación:** Utilizado exclusivamente como apoyo en la redacción de este README.md y para agilizar la escritura de comentarios JSDoc en el código.
+- **Documentación:** Utilizado exclusivamente como apoyo en la redacción de este README.md 
 
 ## Tecnologías Utilizadas
 
@@ -148,7 +149,7 @@ my-blog-project/
 │       ├── authors.service.js
 │       ├── posts.service.js
 │       └── comments.service.js
-├── tests/
+├── test/
 │   ├── unit/
 │   │   ├── authors.service.test.js
 │   │   ├── posts.service.test.js
