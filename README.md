@@ -97,7 +97,7 @@ El archivo OpenAPI se encuentra en `swagger/openapi.yaml`.
    - La **internal URL** es para conexiones internas (como la DB).
 
 5. **Accede**:
-   - API: https://proyectom2facundorozalez-production.up.railway.app/(Agrega el endpoint que desees probar al final de la URL)
+   - API: https://proyectom2facundorozalez-production.up.railway.app/ (Agrega el endpoint que desees probar al final de la URL)
    - Docs: https://proyectom2facundorozalez-production.up.railway.app/openapi/api
 
 ## Registro del Uso de AI en el Proyecto
